@@ -7,16 +7,11 @@ export const ContactsList = () => {
   const dispatch = useDispatch();
 
   const filteredContacts = useSelector(selectedContacts);
-  const normalizedFilter = useSelector(state => state.filter.toLowerCase());
-  const normalizedContacts = filteredContacts.filter(contact => 
-    contact.name.toLowerCase().includes(normalizedFilter)
-  );
-
   return (
     <PhoneList>
-      {normalizedContacts.map(({ id, name, number }) => (
+      {filteredContacts.map(({ id, name, number }) => (
         <PhoneItem key={id}>
-          {name}: {number}{' '}
+          {name}: {number}
           <DeleteButton type="button" onClick={() => dispatch(deleteContact(id))}>
             Delete
           </DeleteButton>
