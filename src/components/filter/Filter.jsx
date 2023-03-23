@@ -1,22 +1,23 @@
+import PropTypes from 'prop-types';
 import { Field } from './Filter.styled';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { filterContacts } from 'redux/filterSlice';
 
 export const Filter = () => {
   const dispatch = useDispatch();
-  const filter = useSelector((state) => state.filter);
 
-  const handleChange = (event) => {
-    dispatch(filterContacts(event.target.value));
+const onWrite = e => {
+    dispatch(filterContacts(e.currentTarget.value));
   };
-
   return (
     <Field
       type="text"
       name="filter"
-      value={filter}
-      onChange={handleChange}
+      onChange={onWrite}
       placeholder="Enter name for search"
     />
   );
+};
+Field.propTypes = {
+  filter: PropTypes.string,
 };

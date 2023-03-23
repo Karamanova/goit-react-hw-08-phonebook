@@ -11,3 +11,10 @@ display: flex;
 justify-content: center;
 padding: 20px;
 `;
+export const LoadingText = styled.p`
+  font-size: 16px;
+  font-weight: bold;
+  color: #0047AB;
+  margin-top: 20px;
+  text-align: center;
+`;
