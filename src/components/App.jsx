@@ -1,53 +1,32 @@
-import { ContactForm } from 'components/contactform/ContactForm';
-import { ContactsList } from 'components/contactslist/ContactsList';
-import { Filter } from 'components/filter/Filter';
-import { Container, Title, LoadingText } from './App.styled';
-import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
-import { fetchContacts, addContact } from '../redux/operations';
-import {
-  selectContactsList,
-  selectIsLoading,
-  selectError,
-  selectFilter,
-} from '../redux/selectors';
+import 'modern-normalize';
+import { lazy, Suspense } from "react";
+import { Routes, Route } from "react-router-dom";
+import { PublicRoute } from "hocs/PublicRoute";
+import { PrivateRoute } from "hocs/PrivateRoute";
+import { Loader } from 'components/common/Loader/Loader';
+
+const AppBar = lazy(() => import('layouts/AppBar'))
+const Contacts = lazy(() => import('pages/Contacts/Contacts'));
+const Home = lazy(() => import('pages/Home/Home'));
+const Login = lazy(() => import('pages/Login/Login'));
+const Register = lazy(() => import('pages/Register/Register'));
 
 export const App = () => {
-  const dispatch = useDispatch();
-  const contacts = useSelector(selectContactsList);
-  const isLoading = useSelector(selectIsLoading);
-  const error = useSelector(selectError);
-  const filter = useSelector(selectFilter);
-  
-  const newContact = name => {
-    contacts.find(
-      contact => contact.name.toLowerCase() === name.name.toLowerCase()
-    )
-      ? alert(`${name.name} is already in contacts`)
-      : dispatch(addContact(name));
-  };
-
-  const handleSubmit = (values, { resetForm }) => {
-    isLoading && <p>Loading contacts...</p>
-    newContact(values);
-    resetForm();
-  };
-
-  useEffect(() => {
-    dispatch(fetchContacts());
-  }, [dispatch]);
-
   return (
-  <Container>
-    <Title>Phonebook</Title>
-    <ContactForm handleSubmit={handleSubmit}/>
-    <Title>Contacts</Title>
-    <Filter />
-    {isLoading && <LoadingText>Loading contacts...</LoadingText>}
-    {error && <p>{error}</p>}
-    {contacts.length > 0 && <ContactsList contacts={filter} />}
-  </Container>
-);
+    <Suspense fallback={<Loader />}>
+        <Routes>
+          <Route path="/" element={<AppBar />}>
+            <Route index path="/"
+              element={<PublicRoute><Home /></PublicRoute>} />
+            <Route path="login"
+              element={<PublicRoute restricted><Login /></PublicRoute>} />
+            <Route path="register"
+              element={<PublicRoute restricted><Register /></PublicRoute>} />
+            <Route path='contacts'
+              element={<PrivateRoute><Contacts /></PrivateRoute>} />
+            <Route path="*" element={<Home />} />
+          </Route>
+        </Routes>
+    </Suspense>
+  );
 };
-
-export default App;
