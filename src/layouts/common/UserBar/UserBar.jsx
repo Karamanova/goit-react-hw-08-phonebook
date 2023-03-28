@@ -13,7 +13,6 @@ export const UserBar = () => {
     dispatch(logoutUser());
     <Navigate to="/" replace={true} />
   }
-  
   return (
     <>
       {isLogged
