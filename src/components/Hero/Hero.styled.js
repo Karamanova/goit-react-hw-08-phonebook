@@ -13,11 +13,14 @@ export const HeroWrapper = styled.div`
 `;
 
 export const HeroTitle = styled.h1`
-  font-weight: 700;
+   font-weight: 700;
   text-align: left;
-  color: #9baacf;
   font-size: 20px;
   margin-bottom: 10px;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  background-image: linear-gradient(90deg, #5B31F7, #31EBF7);
 
   @media screen and (min-width: 768px) and (max-width: 1199px) {
     font-size: 30px;
