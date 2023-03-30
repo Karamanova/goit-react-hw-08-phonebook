@@ -6,7 +6,7 @@ import { Navigate } from "react-router";
 
 export const UserBar = () => {
   const name = useSelector(state => state.auth.user.name);
-  const isLogged = useSelector(state => state.auth.isLogged);
+  const isLoggedIn = useSelector(state => state.auth.isLoggedIn);
   const dispatch = useDispatch();
 
   const logoutHandler = () => {
@@ -15,7 +15,7 @@ export const UserBar = () => {
   }
   return (
     <>
-      {isLogged
+      {isLoggedIn
         ? <UserBarInfo>
             <UserName>You are logged in as: {name}</UserName>
             <PrimaryButton type="button" onClick={logoutHandler}>LOG OUT</PrimaryButton>
