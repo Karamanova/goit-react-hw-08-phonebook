@@ -43,7 +43,7 @@ export const loginUser = createAsyncThunk(
       Notify.success('Login successful!');
       return data;
     } catch (error) {
-      Notify.failure(`${error}. This user dont exist`);
+      Notify.failure(`${error}. This user doesn't exist`);
     }
   }
 );
@@ -61,7 +61,7 @@ export const logoutUser = createAsyncThunk(
   }
 );
 
-// ================== REDUSER
+// ================== REDUCER
 export const authSlice = createSlice({
   name: 'auth',
   initialState,
