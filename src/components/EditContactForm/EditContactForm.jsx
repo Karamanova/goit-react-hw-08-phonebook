@@ -13,14 +13,6 @@ export const EditContactForm = ({ item, onClose }) => {
   const [dispatch, useSelector] = useRedux();
   const items = useSelector(getItems);
 
-  const validateContact = data => {
-    const normalizedValue = data.name.toLowerCase();
-    const result = items.find(item =>
-      item.name.toLowerCase() === normalizedValue
-    );
-    return result;
-  };
-
   const normalizedContact = str => {
     const normalizedName = str
       .split(' ')
