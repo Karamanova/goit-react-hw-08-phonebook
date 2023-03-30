@@ -35,14 +35,19 @@ export const EditContactForm = ({ item, onClose }) => {
       name: normalizedContact(values.name),
       number: values.number,
     };
-    if (validateContact(contact)) {
-      Notify.failure(`${contact.name} already exist`);
+
+    const isDuplicatedName = items.some((contactItem) =>
+      contactItem.id !== contact.id && contactItem.name.toLowerCase() === contact.name.toLowerCase()
+    );
+
+    if (isDuplicatedName) {
+      Notify.failure(`${contact.name} already exists`);
       return;
     } else {
       dispatch(editContactAsync(contact));
       onClose();
     }
-  };
+};
   
   return (
     <Formik
