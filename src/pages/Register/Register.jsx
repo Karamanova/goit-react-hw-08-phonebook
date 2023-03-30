@@ -4,7 +4,7 @@ import { RegisterForm } from "components/auth/RegisterForm/RegisterForm";
 const Register = () => {
   return (
     <>
-      <MainTitle>For creating youre own contacts list please register</MainTitle>
+      <MainTitle>For creating your own contacts list please register</MainTitle>
       <RegisterForm />
     </>
   );

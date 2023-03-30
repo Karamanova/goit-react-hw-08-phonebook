@@ -4,7 +4,7 @@ import { LoginForm } from "components/auth/LoginForm/LoginForm";
 const Login = () => {
   return (
     <>
-      <MainTitle>If you already have account, please log in</MainTitle>
+      <MainTitle>If you already have an account, please log in</MainTitle>
       <LoginForm />
     </>
   );
