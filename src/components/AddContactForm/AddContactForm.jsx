@@ -14,12 +14,12 @@ export const AddContactForm = () => {
   const items = useSelector(getItems);
 
   const validateContact = data => {
-    const normalizedValue = data.name.toLowerCase();
-    const result = items.find(item =>
-      item.name.toLowerCase() === normalizedValue
-    );
-    return result;
-  };
+  const normalizedValue = data.name.toLowerCase();
+  const result = items.find(item =>
+    item.name.toLowerCase() === normalizedValue || item.number === data.number
+  );
+  return result;
+};
 
   const normalizedContact = str => {
     const normalizedName = str
@@ -30,18 +30,18 @@ export const AddContactForm = () => {
   };
 
   const submitHandler = (values, { resetForm }) => {
-    const contact = {
-      name: normalizedContact(values.name),
-      number: values.number,
-    }
-    if (validateContact(contact)) {
-      Notify.failure(`${contact.name} already exist`);
-      return;
-    } else {
-      dispatch(addNewContactAsync(contact));
-    }
-    resetForm();
-  };
+  const contact = {
+    name: normalizedContact(values.name),
+    number: values.number,
+  }
+  if (validateContact(contact)) {
+    Notify.failure(`${contact.name} or number ${contact.number} already exist`);
+    return;
+  } else {
+    dispatch(addNewContactAsync(contact));
+  }
+  resetForm();
+};
   
   return (
     <>
