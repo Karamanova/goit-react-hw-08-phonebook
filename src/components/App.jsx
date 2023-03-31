@@ -29,13 +29,27 @@ export const App = () => {
     <Suspense fallback={<Loader />}>
       <Routes>
         <Route path="/" element={<AppBar />}>
-          <Route index path="/" element={<RestrictedRoute><Home /></RestrictedRoute>} />
-          <Route path="login" element={<RestrictedRoute><Login /></RestrictedRoute>} />
-          <Route path="register" element={<RestrictedRoute><Register /></RestrictedRoute>} />
-          <Route path="contacts" element={<PrivateRoute component={Contacts} redirectTo="/login" />} />
-          <Route path="*" element={<Home />} />
-        </Route>
-      </Routes>
+          <Route index element={<Home />} />
+        <Route
+          path="/register"
+          element={
+            <RestrictedRoute redirectTo="/contacts" component={<Register />} />
+          }
+        />
+        <Route
+          path="/login"
+          element={
+            <RestrictedRoute redirectTo="/contacts" component={<Login />} />
+          }
+        />
+        <Route
+          path="/contacts"
+          element={
+            <PrivateRoute redirectTo="/login" component={<Contacts />} />
+          }
+        />
+      </Route>
+    </Routes>
     </Suspense>
   );
 };
