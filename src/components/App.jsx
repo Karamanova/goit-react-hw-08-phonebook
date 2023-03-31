@@ -22,7 +22,9 @@ export const App = () => {
   useEffect(() => {
     dispatch(fetchCurrentUser());
   }, [dispatch]);
-  return (
+  return isRefreshing ? (
+    <b>Refreshing user...</b>
+  ) : (
     <Suspense fallback={<Loader />}>
         <Routes>
           <Route path="/" element={<AppBar />}>
