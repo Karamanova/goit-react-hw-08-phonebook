@@ -17,6 +17,7 @@ const initialState = {
   isRefreshing: false,
 };
 
+export const selectIsRefreshing = state => state.auth.isRefreshing;
 // ================== SELECTORS
 export const getUserName = (state) => state.auth.user.name;
 export const getLogging = (state) => state.auth.isLoggedIn;
